@@ -101,7 +101,7 @@ public class IPLAnalyser {
 		bowlingList.stream().sorted(comparator).collect(Collectors.toList());
 	}
 	
-	public void sortBowlersByMaxWicketsAndBowlingAverage(List<IPLMostWicketsCSV> bowlingList2) {
+	public void sortBowlersByMaxWicketsAndBowlingAverage(List<IPLMostWicketsCSV> bowlingList) {
 		Comparator<IPLMostWicketsCSV> maxWicketsComparator = Comparator.comparing(Bowler -> Bowler.totalWickets);
 		Comparator<IPLMostWicketsCSV> bowlingAverageComparator = Comparator.comparing(Bowler -> Bowler.bowlingAverage);
 		Comparator comparator = maxWicketsComparator.thenComparing(bowlingAverageComparator);
@@ -119,6 +119,17 @@ public class IPLAnalyser {
 				}
 			}
 		}
+	}
+
+	public String sortBowlersByBattingAverageAndBowlingAverage(List<IPLMostWicketsCSV> bowlingList, List<IPLMostRunsCSV> battingList) {
+		this.sortByBowlingAverage(bowlingList);
+		this.sortByBattingAverage(battingList);
+		for (int i = 0; i < (bowlingList.size() > battingList.size() ? battingList.size() - 1
+				: bowlingList.size() - 1); i++) {
+			if (bowlingList.get(i).playerName.equals(battingList.get(i).playerName))
+				return bowlingList.get(i).playerName;
+		}
+		return null;
 	}
 
 	
