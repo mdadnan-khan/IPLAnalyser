@@ -76,6 +76,11 @@ public class IPLAnalyser {
 		Comparator<IPLMostWicketsCSV> comparator = Comparator.comparing(Bowler -> Bowler.bowlingAverage);
 		Collections.sort(bowlingList, comparator.reversed());
 	}
+	
+	public void sortBowlersByBestStrikeRate(List<IPLMostWicketsCSV> bowlingList2) {
+		Comparator<IPLMostWicketsCSV> comparator = Comparator.comparing(Bowler -> Bowler.strikeRate);
+		Collections.sort(bowlingList, comparator.reversed());
+	}
 
 	
 	private <E> void sortCSVDescending(Comparator<E> Comparator, List<E> csvList) {
@@ -90,4 +95,6 @@ public class IPLAnalyser {
 			}
 		}
 	}
+
+	
 }
