@@ -108,18 +108,6 @@ public class IPLAnalyser {
 		bowlingList.stream().sorted(comparator).collect(Collectors.toList());
 	}
 
-	private <E> void sortCSVDescending(Comparator<E> Comparator, List<E> csvList) {
-		for (int i = 0; i < csvList.size() - 1; i++) {
-			for (int j = 0; j < csvList.size() - i - 1; j++) {
-				E census1 = csvList.get(j);
-				E census2 = csvList.get(j + 1);
-				if (Comparator.compare(census1, census2) > 0) {
-					csvList.set(j, census2);
-					csvList.set(j + 1, census1);
-				}
-			}
-		}
-	}
 
 	public String sortBowlersByBattingAverageAndBowlingAverage(List<IPLMostWicketsCSV> bowlingList,
 			List<IPLMostRunsCSV> battingList) {
@@ -146,11 +134,32 @@ public class IPLAnalyser {
 		return null;
 	}
 
-	public void sortByMaxHundredsAndBestBattingAverages(List<IPLMostRunsCSV> battingList2) {
+	public void sortByMaxHundredsAndBestBattingAverages(List<IPLMostRunsCSV> battingList) {
 		Comparator<IPLMostRunsCSV> hundredsComparator = Comparator.comparing(BatsMan -> BatsMan.noOfHundreds);
 		Comparator<IPLMostRunsCSV> battingAverageComparator = Comparator.comparing(BatsMan -> BatsMan.battingAverage);
 		Comparator comparator = hundredsComparator.thenComparing(battingAverageComparator);
 		battingList.stream().sorted(comparator).collect(Collectors.toList());
+	}
+
+	public void sortByMinHundredsFiftiesAndBestBattingAverages(List<IPLMostRunsCSV> battingList) {
+		Comparator<IPLMostRunsCSV> hundredsComparator = Comparator.comparing(Batsmen -> Batsmen.noOfHundreds);
+		Comparator<IPLMostRunsCSV> fiftiesComparator = Comparator.comparing(Batsmen -> Batsmen.noOfFifties);
+		Comparator<IPLMostRunsCSV> battingAverageComparator = Comparator.comparing(Batsmen -> Batsmen.battingAverage);
+		Comparator<IPLMostRunsCSV> comparator = hundredsComparator.thenComparing(fiftiesComparator).thenComparing(battingAverageComparator.reversed());
+		this.sortCSVDescending(comparator, battingList);
+	}
+	
+	private <E> void sortCSVDescending(Comparator<E> Comparator, List<E> csvList) {
+		for (int i = 0; i < csvList.size() - 1; i++) {
+			for (int j = 0; j < csvList.size() - i - 1; j++) {
+				E census1 = csvList.get(j);
+				E census2 = csvList.get(j + 1);
+				if (Comparator.compare(census1, census2) > 0) {
+					csvList.set(j, census2);
+					csvList.set(j + 1, census1);
+				}
+			}
+		}
 	}
 
 }
