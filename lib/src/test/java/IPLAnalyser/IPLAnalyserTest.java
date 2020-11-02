@@ -49,4 +49,12 @@ public class IPLAnalyserTest {
 		Assert.assertEquals("MS Dhoni", battingList.get(0).playerName);
 	}
 	
+	@Test
+	public void givenMostRunsCSVFile_ShouldReturnTopStrikingAndBestAverages() throws IPLException {
+		IPLAnalyser iplAnalyser = new IPLAnalyser();
+		List<IPLMostRunsCSV> battingList = iplAnalyser.loadBattingData(MOST_RUNS_CSV_FILE_PATH);
+		iplAnalyser.sortByTopStrikeRateAndBestAverage(battingList);
+		Assert.assertEquals("David Warner", battingList.get(0).playerName);
+	}
+	
 }
