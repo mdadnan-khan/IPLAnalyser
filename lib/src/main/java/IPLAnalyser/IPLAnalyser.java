@@ -101,6 +101,13 @@ public class IPLAnalyser {
 		bowlingList.stream().sorted(comparator).collect(Collectors.toList());
 	}
 	
+	public void sortBowlersByMaxWicketsAndBowlingAverage(List<IPLMostWicketsCSV> bowlingList2) {
+		Comparator<IPLMostWicketsCSV> maxWicketsComparator = Comparator.comparing(Bowler -> Bowler.totalWickets);
+		Comparator<IPLMostWicketsCSV> bowlingAverageComparator = Comparator.comparing(Bowler -> Bowler.bowlingAverage);
+		Comparator comparator = maxWicketsComparator.thenComparing(bowlingAverageComparator);
+		bowlingList.stream().sorted(comparator).collect(Collectors.toList());
+	}
+	
 	private <E> void sortCSVDescending(Comparator<E> Comparator, List<E> csvList) {
 		for (int i = 0; i < csvList.size() - 1; i++) {
 			for (int j = 0; j < csvList.size() - i - 1; j++) {
@@ -113,6 +120,8 @@ public class IPLAnalyser {
 			}
 		}
 	}
+
+	
 
 	
 
