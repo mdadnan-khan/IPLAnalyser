@@ -121,4 +121,13 @@ public class IPLAnalyserTest {
 		String name = iplAnalyser.sortBowlersByBattingAverageAndBowlingAverage(bowlingList, battingList);
 		Assert.assertEquals("Umesh Yadav", name);
 	}
+	
+	@Test
+	public void givenMostWicketsCSVFile_ShouldReturnMostRunsAndWickets() throws IPLException {
+		IPLAnalyser iplAnalyser = new IPLAnalyser();
+		List<IPLMostRunsCSV> battingList = iplAnalyser.loadBattingData(MOST_RUNS_CSV_FILE_PATH);
+		List<IPLMostWicketsCSV> bowlingList = iplAnalyser.loadBowlingData(MOST_WICKETS_CSV_FILE_PATH);
+		String name = iplAnalyser.sortCricketersByMostRunsAndWickets(bowlingList, battingList);
+		Assert.assertEquals("David Warner", name);
+	}
 }

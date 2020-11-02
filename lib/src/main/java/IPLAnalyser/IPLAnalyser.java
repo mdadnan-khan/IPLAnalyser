@@ -27,7 +27,7 @@ public class IPLAnalyser {
 			throw new IPLException(e.getMessage(), IPLException.ExceptionType.CSV_FILE_PROBLEM);
 		}
 	}
-	
+
 	public List<IPLMostWicketsCSV> loadBowlingData(String mostWicketsCsvFilePath) throws IPLException {
 		try (Reader reader = Files.newBufferedReader(Paths.get(mostWicketsCsvFilePath))) {
 			ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
@@ -57,7 +57,6 @@ public class IPLAnalyser {
 		this.sortCSVDescending(comparator, battingList);
 	}
 
-
 	public void sortByTopStrikeRateAndBestAverage(List<IPLMostRunsCSV> battingList) {
 		Comparator<IPLMostRunsCSV> averageComparator = Comparator.comparing(BatsMan -> BatsMan.battingAverage);
 		Comparator<IPLMostRunsCSV> strikeRateComparator = Comparator.comparing(BatsMan -> BatsMan.strikeRate);
@@ -76,7 +75,7 @@ public class IPLAnalyser {
 		Comparator<IPLMostWicketsCSV> comparator = Comparator.comparing(Bowler -> Bowler.bowlingAverage);
 		Collections.sort(bowlingList, comparator.reversed());
 	}
-	
+
 	public void sortBowlersByBestStrikeRate(List<IPLMostWicketsCSV> bowlingList) {
 		Comparator<IPLMostWicketsCSV> comparator = Comparator.comparing(Bowler -> Bowler.strikeRate);
 		Collections.sort(bowlingList, comparator.reversed());
@@ -86,28 +85,29 @@ public class IPLAnalyser {
 		Comparator<IPLMostWicketsCSV> comparator = Comparator.comparing(Bowler -> Bowler.economy);
 		Collections.sort(bowlingList, comparator.reversed());
 	}
-	
+
 	public void sortBowlersByStrikeRateAndWickets(List<IPLMostWicketsCSV> bowlingList) {
 		Comparator<IPLMostWicketsCSV> strikeRateComparator = Comparator.comparing(Bowler -> Bowler.strikeRate);
-		Comparator<IPLMostWicketsCSV> wicketsComparator = Comparator.comparing(Bowler -> Bowler.fiveWickets + Bowler.fourWickets);
+		Comparator<IPLMostWicketsCSV> wicketsComparator = Comparator
+				.comparing(Bowler -> Bowler.fiveWickets + Bowler.fourWickets);
 		Collections.sort(bowlingList, strikeRateComparator.reversed());
 		Collections.sort(bowlingList, wicketsComparator.reversed());
 	}
-	
+
 	public void sortBowlersByBowlingAverageAndStrikeRate(List<IPLMostWicketsCSV> bowlingList) {
 		Comparator<IPLMostWicketsCSV> strikeRateComparator = Comparator.comparing(Bowler -> Bowler.strikeRate);
 		Comparator<IPLMostWicketsCSV> bowlingAverageComparator = Comparator.comparing(Bowler -> Bowler.bowlingAverage);
 		Comparator comparator = bowlingAverageComparator.thenComparing(strikeRateComparator);
 		bowlingList.stream().sorted(comparator).collect(Collectors.toList());
 	}
-	
+
 	public void sortBowlersByMaxWicketsAndBowlingAverage(List<IPLMostWicketsCSV> bowlingList) {
 		Comparator<IPLMostWicketsCSV> maxWicketsComparator = Comparator.comparing(Bowler -> Bowler.totalWickets);
 		Comparator<IPLMostWicketsCSV> bowlingAverageComparator = Comparator.comparing(Bowler -> Bowler.bowlingAverage);
 		Comparator comparator = maxWicketsComparator.thenComparing(bowlingAverageComparator);
 		bowlingList.stream().sorted(comparator).collect(Collectors.toList());
 	}
-	
+
 	private <E> void sortCSVDescending(Comparator<E> Comparator, List<E> csvList) {
 		for (int i = 0; i < csvList.size() - 1; i++) {
 			for (int j = 0; j < csvList.size() - i - 1; j++) {
@@ -121,7 +121,8 @@ public class IPLAnalyser {
 		}
 	}
 
-	public String sortBowlersByBattingAverageAndBowlingAverage(List<IPLMostWicketsCSV> bowlingList, List<IPLMostRunsCSV> battingList) {
+	public String sortBowlersByBattingAverageAndBowlingAverage(List<IPLMostWicketsCSV> bowlingList,
+			List<IPLMostRunsCSV> battingList) {
 		this.sortByBowlingAverage(bowlingList);
 		this.sortByBattingAverage(battingList);
 		for (int i = 0; i < (bowlingList.size() > battingList.size() ? battingList.size() - 1
@@ -132,12 +133,17 @@ public class IPLAnalyser {
 		return null;
 	}
 
-	
+	public String sortCricketersByMostRunsAndWickets(List<IPLMostWicketsCSV> bowlingList, List<IPLMostRunsCSV> battingList) {
+		Comparator<IPLMostWicketsCSV> wicketsComparator = Comparator.comparing(Bowler -> Bowler.totalWickets);
+		Collections.sort(bowlingList, wicketsComparator.reversed());
+		Comparator<IPLMostRunsCSV> runsComparator = Comparator.comparing(Batsman -> Batsman.runs);
+		Collections.sort(battingList, runsComparator.reversed());
+		for (int i = 0; i < (bowlingList.size() > battingList.size() ? battingList.size() - 1
+				: bowlingList.size() - 1); i++) {
+			if (bowlingList.get(i).playerName.equals(battingList.get(i).playerName))
+				return bowlingList.get(i).playerName;
+		}
+		return null;
+	}
 
-	
-
-	
-
-
-	
 }
