@@ -33,4 +33,9 @@ public class IPLAnalyser {
 		Collections.sort(battingList, comparator.reversed());
 	}
 
+	public void sortByStrikeRate(List<IPLMostRunsCSV> battingList2) {
+		Comparator<IPLMostRunsCSV> comparator = Comparator.comparing(BatsMan -> BatsMan.strikeRate);
+		Collections.sort(battingList, comparator.reversed());
+	}
+
 }

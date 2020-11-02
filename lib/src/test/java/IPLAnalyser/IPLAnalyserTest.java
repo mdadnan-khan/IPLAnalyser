@@ -23,4 +23,13 @@ public class IPLAnalyserTest {
 		iplAnalyser.sortByBattingAverage(battingList);
 		Assert.assertEquals("MS Dhoni", battingList.get(0).playerName);
 	}
+	
+	@Test
+	public void givenMostRunsCSVFile_ShouldReturnTopStrikeRate() throws IPLException {
+		IPLAnalyser iplAnalyser = new IPLAnalyser();
+		List<IPLMostRunsCSV> battingList = iplAnalyser.loadBattingData(MOST_RUNS_CSV_FILE_PATH);
+		iplAnalyser.sortByStrikeRate(battingList);
+		Assert.assertEquals("Ishant Sharma", battingList.get(0).playerName);
+	}
+	
 }
