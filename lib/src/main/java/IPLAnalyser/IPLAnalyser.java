@@ -77,12 +77,12 @@ public class IPLAnalyser {
 		Collections.sort(bowlingList, comparator.reversed());
 	}
 	
-	public void sortBowlersByBestStrikeRate(List<IPLMostWicketsCSV> bowlingList2) {
+	public void sortBowlersByBestStrikeRate(List<IPLMostWicketsCSV> bowlingList) {
 		Comparator<IPLMostWicketsCSV> comparator = Comparator.comparing(Bowler -> Bowler.strikeRate);
 		Collections.sort(bowlingList, comparator.reversed());
 	}
 
-	public void sortBowlersByBestEconomy(List<IPLMostWicketsCSV> bowlingList2) {
+	public void sortBowlersByBestEconomy(List<IPLMostWicketsCSV> bowlingList) {
 		Comparator<IPLMostWicketsCSV> comparator = Comparator.comparing(Bowler -> Bowler.economy);
 		Collections.sort(bowlingList, comparator.reversed());
 	}
@@ -92,6 +92,13 @@ public class IPLAnalyser {
 		Comparator<IPLMostWicketsCSV> wicketsComparator = Comparator.comparing(Bowler -> Bowler.fiveWickets + Bowler.fourWickets);
 		Collections.sort(bowlingList, strikeRateComparator.reversed());
 		Collections.sort(bowlingList, wicketsComparator.reversed());
+	}
+	
+	public void sortBowlersByBowlingAverageAndStrikeRate(List<IPLMostWicketsCSV> bowlingList) {
+		Comparator<IPLMostWicketsCSV> strikeRateComparator = Comparator.comparing(Bowler -> Bowler.strikeRate);
+		Comparator<IPLMostWicketsCSV> bowlingAverageComparator = Comparator.comparing(Bowler -> Bowler.bowlingAverage);
+		Comparator comparator = bowlingAverageComparator.thenComparing(strikeRateComparator);
+		bowlingList.stream().sorted(comparator).collect(Collectors.toList());
 	}
 	
 	private <E> void sortCSVDescending(Comparator<E> Comparator, List<E> csvList) {
@@ -106,6 +113,8 @@ public class IPLAnalyser {
 			}
 		}
 	}
+
+	
 
 	
 

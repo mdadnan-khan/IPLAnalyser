@@ -96,4 +96,12 @@ public class IPLAnalyserTest {
 		iplAnalyser.sortBowlersByStrikeRateAndWickets(bowlingList);
 		Assert.assertEquals("Alzarri Joseph", bowlingList.get(0).playerName);
 	}
+	
+	@Test
+	public void givenMostWicketsCSVFile_ShouldReturnBestBowlingAverageAndStrikeRate() throws IPLException {
+		IPLAnalyser iplAnalyser = new IPLAnalyser();
+		List<IPLMostWicketsCSV> bowlingList = iplAnalyser.loadBowlingData(MOST_WICKETS_CSV_FILE_PATH);
+		iplAnalyser.sortBowlersByBowlingAverageAndStrikeRate(bowlingList);
+		Assert.assertEquals("Anukul Roy", bowlingList.get(0).playerName);
+	}
 }
