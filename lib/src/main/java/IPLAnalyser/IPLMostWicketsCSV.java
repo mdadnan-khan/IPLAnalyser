@@ -6,7 +6,7 @@ public class IPLMostWicketsCSV {
 	@CsvBindByName(column = "PLAYER")
 	public String playerName;
 	
-	@CsvBindByName(column = "Wickets")
+	@CsvBindByName(column = "Wkts")
 	public int totalWickets;
 	
 	@CsvBindByName(column = "Avg")

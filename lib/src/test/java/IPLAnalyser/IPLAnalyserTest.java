@@ -65,4 +65,12 @@ public class IPLAnalyserTest {
 		Assert.assertEquals("David Warner", battingList.get(0).playerName);
 	}
 	
+	@Test
+	public void givenMostWicketsCSVFile_ShouldReturnBestBowlingAverages() throws IPLException {
+		IPLAnalyser iplAnalyser = new IPLAnalyser();
+		List<IPLMostWicketsCSV> bowlingList = iplAnalyser.loadBowlingData(MOST_WICKETS_CSV_FILE_PATH);
+		iplAnalyser.sortByBowlingAverage(bowlingList);
+		Assert.assertEquals("Krishnappa Gowtham", bowlingList.get(0).playerName);
+	}
+	
 }
