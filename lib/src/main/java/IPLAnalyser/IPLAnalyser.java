@@ -38,4 +38,22 @@ public class IPLAnalyser {
 		Collections.sort(battingList, comparator.reversed());
 	}
 
+	public void sortByMaxSixesAndFours(List<IPLMostRunsCSV> battingList) {
+		Comparator<IPLMostRunsCSV> comparator = Comparator.comparing(BatsMan -> BatsMan.noOfSixes + BatsMan.noOfFours);
+		this.sortCSVDescending(comparator, battingList);
+	}
+
+	private <E> void sortCSVDescending(Comparator<E> Comparator, List<E> csvList) {
+		for (int i = 0; i < csvList.size() - 1; i++) {
+			for (int j = 0; j < csvList.size() - i - 1; j++) {
+				E census1 = csvList.get(j);
+				E census2 = csvList.get(j + 1);
+				if (Comparator.compare(census1, census2) > 0) {
+					csvList.set(j, census2);
+					csvList.set(j + 1, census1);
+				}
+			}
+		}
+	}
+
 }

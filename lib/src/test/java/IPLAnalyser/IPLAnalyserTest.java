@@ -32,4 +32,12 @@ public class IPLAnalyserTest {
 		Assert.assertEquals("Ishant Sharma", battingList.get(0).playerName);
 	}
 	
+	@Test
+	public void givenMostRunsCSVFile_ShouldReturnMaxSixesAndFours() throws IPLException {
+		IPLAnalyser iplAnalyser = new IPLAnalyser();
+		List<IPLMostRunsCSV> battingList = iplAnalyser.loadBattingData(MOST_RUNS_CSV_FILE_PATH);
+		iplAnalyser.sortByMaxSixesAndFours(battingList);
+		Assert.assertEquals("Andre Rusell", battingList.get(0).playerName);
+	}
+	
 }
