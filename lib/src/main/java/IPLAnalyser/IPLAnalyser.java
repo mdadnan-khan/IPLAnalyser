@@ -87,6 +87,13 @@ public class IPLAnalyser {
 		Collections.sort(bowlingList, comparator.reversed());
 	}
 	
+	public void sortBowlersByStrikeRateAndWickets(List<IPLMostWicketsCSV> bowlingList) {
+		Comparator<IPLMostWicketsCSV> strikeRateComparator = Comparator.comparing(Bowler -> Bowler.strikeRate);
+		Comparator<IPLMostWicketsCSV> wicketsComparator = Comparator.comparing(Bowler -> Bowler.fiveWickets + Bowler.fourWickets);
+		Collections.sort(bowlingList, strikeRateComparator.reversed());
+		Collections.sort(bowlingList, wicketsComparator.reversed());
+	}
+	
 	private <E> void sortCSVDescending(Comparator<E> Comparator, List<E> csvList) {
 		for (int i = 0; i < csvList.size() - 1; i++) {
 			for (int j = 0; j < csvList.size() - i - 1; j++) {
@@ -99,6 +106,8 @@ public class IPLAnalyser {
 			}
 		}
 	}
+
+	
 
 
 	

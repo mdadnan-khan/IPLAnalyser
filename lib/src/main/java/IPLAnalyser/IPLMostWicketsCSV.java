@@ -20,4 +20,7 @@ public class IPLMostWicketsCSV {
 	
 	@CsvBindByName(column = "5w")
 	public int fiveWickets;
+	
+	@CsvBindByName(column = "4w")
+	public int fourWickets;
 }
