@@ -146,4 +146,11 @@ public class IPLAnalyser {
 		return null;
 	}
 
+	public void sortByMaxHundredsAndBestBattingAverages(List<IPLMostRunsCSV> battingList2) {
+		Comparator<IPLMostRunsCSV> hundredsComparator = Comparator.comparing(BatsMan -> BatsMan.noOfHundreds);
+		Comparator<IPLMostRunsCSV> battingAverageComparator = Comparator.comparing(BatsMan -> BatsMan.battingAverage);
+		Comparator comparator = hundredsComparator.thenComparing(battingAverageComparator);
+		battingList.stream().sorted(comparator).collect(Collectors.toList());
+	}
+
 }

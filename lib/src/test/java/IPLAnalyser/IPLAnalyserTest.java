@@ -130,4 +130,12 @@ public class IPLAnalyserTest {
 		String name = iplAnalyser.sortCricketersByMostRunsAndWickets(bowlingList, battingList);
 		Assert.assertEquals("David Warner", name);
 	}
+	
+	@Test
+	public void givenMostRunsCSVFile_ShouldReturnMaxHundredsAndBestBattingAverages() throws IPLException {
+		IPLAnalyser iplAnalyser = new IPLAnalyser();
+		List<IPLMostRunsCSV> battingList = iplAnalyser.loadBattingData(MOST_RUNS_CSV_FILE_PATH);
+		iplAnalyser.sortByMaxHundredsAndBestBattingAverages(battingList);
+		Assert.assertEquals("David Warner", battingList.get(0).playerName);
+	}
 }
