@@ -63,4 +63,11 @@ public class IPLAnalyser {
 		Collections.sort(battingList, strikeRateComparator.reversed());
 	}
 
+	public void sortByMaxRunsAndBestAverage(List<IPLMostRunsCSV> battingList2) {
+		Comparator<IPLMostRunsCSV> maxRunsComparator = Comparator.comparing(BatsMan -> BatsMan.runs);
+		Comparator<IPLMostRunsCSV> averageComparator = Comparator.comparing(BatsMan -> BatsMan.battingAverage);
+		Collections.sort(battingList, maxRunsComparator.reversed());
+		Collections.sort(battingList, averageComparator.reversed());
+	}
+
 }
