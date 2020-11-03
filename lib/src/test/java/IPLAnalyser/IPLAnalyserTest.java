@@ -54,7 +54,7 @@ public class IPLAnalyserTest {
 		IPLAnalyser iplAnalyser = new IPLAnalyser();
 		List<IPLMostRunsCSV> battingList = iplAnalyser.loadBattingData(MOST_RUNS_CSV_FILE_PATH);
 		iplAnalyser.sortByTopStrikeRateAndBestAverage(battingList);
-		Assert.assertEquals("David Warner", battingList.get(0).playerName);
+		Assert.assertEquals("David Warner ", battingList.get(0).playerName);
 	}
 	
 	@Test
@@ -62,7 +62,7 @@ public class IPLAnalyserTest {
 		IPLAnalyser iplAnalyser = new IPLAnalyser();
 		List<IPLMostRunsCSV> battingList = iplAnalyser.loadBattingData(MOST_RUNS_CSV_FILE_PATH);
 		iplAnalyser.sortByMaxRunsAndBestAverage(battingList);
-		Assert.assertEquals("David Warner", battingList.get(0).playerName);
+		Assert.assertEquals("David Warner ", battingList.get(0).playerName);
 	}
 	
 	@Test
@@ -136,7 +136,7 @@ public class IPLAnalyserTest {
 		IPLAnalyser iplAnalyser = new IPLAnalyser();
 		List<IPLMostRunsCSV> battingList = iplAnalyser.loadBattingData(MOST_RUNS_CSV_FILE_PATH);
 		iplAnalyser.sortByMaxHundredsAndBestBattingAverages(battingList);
-		Assert.assertEquals("David Warner", battingList.get(0).playerName);
+		Assert.assertEquals("David Warner ", battingList.get(0).playerName);
 	}
 	
 	@Test
